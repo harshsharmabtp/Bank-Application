@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .navbar {
+            background-color: #007bff;
+            width: 100%;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 10px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav-links a:hover {
+            background-color: white;
+            color: #007bff;
+        }
+
+        .auth-buttons {
+            display: flex;
+        }
+
+        .auth-buttons a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-left: 15px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .auth-buttons a:hover {
+            background-color: white;
+            color: #007bff;
+        }
+
+        .container {
+            display: flex;
+            width: 80%;
+            margin-top: 100px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .form-section {
+            background-color: white;
+            padding: 40px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 400px;
+            margin-left: 23rem;
+            margin-top: 5rem;
+            padding-top: 8rem;
+            padding-bottom: 7rem;
+        }
+
+        h1 {
+            color: #007bff;
+            text-align: center;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #007bff;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #loginResponseMessage {
+            margin-top: 20px;
+            color: red;
+            text-align: center;
+        }
+
+        .side-image {
+            margin-left: 40px;
+        }
+
+        .side-image img {
+            width: 544px;
+            border-radius: 10px;
+            box-shadow: 0 0px 0px ;
+            margin-top: 5rem;
+            height: 30rem;
+            padding-right: 4rem;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="Logo"> <!-- Replace with your logo -->
+        </div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+        </div>
+        <div class="auth-buttons">
+            <a href="Register.html">Register</a>
+            
+        </div>
+    </nav>
+
+    <!-- Login Form Section -->
+    <div class="container">
+        <div class="form-section">
+            <h1>Login</h1>
+            <form id="loginForm">
+                <input type="email" name="email" id="loginemail" placeholder="Enter your email" required><br><br>
+                <input type="password" name="password" id="loginPassword" placeholder="Enter your Password" required><br><br>
+                <button type="submit">Login</button>
+            </form>
+            <div id="loginResponseMessage"></div>
+        </div>
+
+        <!-- Side Image -->
+        <div class="side-image">
+            <img src="LoginPageUI.jpg" alt="Login Image"> <!-- Replace with your image -->
+        </div>
+    </div>
+
+    <script>
+        // Login logic
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('loginemail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            try {
+                const response = await fetch('/api-auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+                document.getElementById('loginResponseMessage').textContent = data.message;
+
+                if (data.token) {
+                    localStorage.setItem('authToken', data.token);
+                }
+                if(data.message=="Login Successfull"){
+                    window.location.href="/home.html";
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('loginResponseMessage').textContent = 'An error occurred.';
+            }
+        });
+    </script>
+</body>
+</html>

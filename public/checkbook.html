@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkbook Purchase Form</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            background-color: #007bff; /* Updated color */
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgb(250, 243, 243); /* Text color changed for better contrast */
+        }
+
+        .navbar a {
+            color: white; /* Updated color */
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Main form styling */
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            margin: 50px auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: #444;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            border-color: #28a745;
+        }
+
+        .submit-btn, .next-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 18px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover, .next-btn:hover {
+            background-color: #218838;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+        }
+
+        /* Popup Box Styling */
+        .popup-box {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translate(-50%, 0);
+            background-color: #28a745;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 18px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        /* Media Queries */
+        @media(max-width: 600px) {
+            .form-container {
+                width: 90%;
+                padding: 20px;
+            }
+
+            .navbar a {
+                font-size: 16px;
+            }
+
+            .submit-btn, .next-btn {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">Checkbook Store</div>
+        <div>
+            <a href="#home"><i class="fas fa-home icon"></i>Home</a>
+            <a href="#about"><i class="fas fa-info-circle icon"></i>About Us</a>
+            <a href="#contact"><i class="fas fa-phone-alt icon"></i>Contact</a>
+        </div>
+    </div>
+
+    <!-- Form Container -->
+    <div class="form-container">
+        <h2>Purchase Your Checkbook</h2>
+        <form id="checkbookForm" style="display: none;"> <!-- Hide the entire form initially -->
+            <div id="step1">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="next-btn" id="nextBtn">Next</button>
+                </div>
+            </div>
+
+            <div id="step2" style="display: none;"> <!-- Second step of the form -->
+                <div class="form-group">
+                    <label for="bank">Bank Name</label>
+                    <input type="text" id="bank" name="bank" required>
+                </div>
+                <div class="form-group">
+                    <label for="account_number">Account Number</label>
+                    <input type="text" id="account_number" name="account_number" required>
+                </div>
+                <div class="form-group">
+                    <label for="checkbook_type">Checkbook Type</label>
+                    <select id="checkbook_type" name="checkbook_type" required>
+                        <option value="standard">Standard</option>
+                        <option value="deluxe">Deluxe</option>
+                        <option value="personalized">Personalized</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" id="quantity" name="quantity" required min="1">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="submit-btn">Submit</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Add a div for the response message -->
+        <div id="responseMessage"></div>
+    </div>
+
+    <!-- Popup Box -->
+    <div id="popupBox" class="popup-box">
+        Thanks for making the request!
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2024 Checkbook Store. All Rights Reserved.</p>
+    </div>
+
+    <script>
+        // Show the form when the page loads
+        document.getElementById('checkbookForm').style.display = 'block';
+
+        // Step 1 to Step 2
+        document.getElementById('nextBtn').addEventListener('click', function() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+
+            if (name && email && phone) {
+                // Hide Step 1 and show Step 2
+                document.getElementById('step1').style.display = 'none';
+                document.getElementById('step2').style.display = 'block';
+            } else {
+                alert('Please fill in all fields.');
+            }
+        });
+
+        document.getElementById('checkbookForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent form from submitting the traditional way
+
+            // Collect form data
+            const formData = {
+                full_name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone_number: document.getElementById('phone').value,
+                mailing_address: document.getElementById('address') ? document.getElementById('address').value : '',
+                bank_name: document.getElementById('bank').value,
+                account_number: document.getElementById('account_number').value,
+                checkbook_type: document.getElementById('checkbook_type').value,
+                quantity: document.getElementById('quantity').value,
+            };
+
+            try {
+                const response = await fetch('http://localhost:14000/api-auth/CheckBook', { // Change this to your actual API endpoint
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
+
+                const result = await response.json();
+
+                // Display response message
+                document.getElementById('responseMessage').innerText = result.message;
+
+                // Show popup
+                const popupBox = document.getElementById('popupBox');
+                popupBox.style.display = 'block';
+
+                // Hide popup after 3 seconds
+                setTimeout(() => {
+                    popupBox.style.display = 'none';
+                }, 3000);
+
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('responseMessage').innerText = 'Error submitting the request.';
+            }
+        });
+    </script>
+</body>
+</html>

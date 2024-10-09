@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDBI Bank Internet Banking</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4; /* Light background */
+            line-height: 1.6; /* Improved line spacing */
+        }
+
+        /* Navbar styles */
+        .navbar {
+            background-color: #007bff; /* Blue background */
+            display: flex;
+            justify-content: center; /* Center elements */
+            align-items: center;
+            padding: 15px 0; /* Padding on top and bottom */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+        }
+
+        .logo img {
+            height: 50px; /* Logo height */
+            margin-right: 20px; /* Space between logo and links */
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px; /* Space between navbar items */
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white; /* White text */
+            font-size: 18px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #d9edf7; /* Light blue on hover */
+        }
+
+        /* Slider styles */
+        .slider {
+            position: relative;
+            height: 50vh;
+            overflow: hidden;
+            background: url('slider-image.jpg') center/cover no-repeat; /* Single image */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        /* Features Section */
+        .features {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap; /* Allows wrapping of feature boxes */
+            gap: 20px; /* Spacing between feature boxes */
+        }
+
+        .feature-box {
+            border-radius: 10px;
+            width: 377px;
+            margin: 10px;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            height: auto; /* Adjust height */
+            transition: transform 0.3s, box-shadow 0.3s; /* Animation effect */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+        }
+
+        .feature-box.green {
+            background-color: #4caf50; /* Green background */
+        }
+
+        .feature-box.yellow {
+            background-color: #82b2ce; /* Yellow background */
+            color: rgb(250, 246, 246); /* Black text for visibility */
+        }
+
+        .feature-box:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Darker shadow on hover */
+        }
+
+        /* Additional Information Section */
+        .additional-info {
+            text-align: center;
+            margin: 20px;
+            padding: 20px;
+            background-color: #ffffff; /* White background for contrast */
+            border-radius: 10px;
+            color: #333; /* Dark text color */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
+        }
+
+       /* How to Apply Section */
+.how-to-apply {
+    text-align: center;
+    margin: 40px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Space between cards */
+    background-color: white; /* White background for the card section */
+    padding: 20px; /* Padding for the section */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+}
+
+.card {
+    background: linear-gradient(135deg, #007bff, #0056b3); /* Gradient background */
+    color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items */
+    width: 250px; /* Card width */
+    position: relative; /* For image positioning */
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s; /* Animation effect */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4); /* Darker shadow on hover */
+    background: linear-gradient(135deg, #0056b3, #003d80); /* Darker gradient on hover */
+}
+
+.card img {
+    width: 70%; /* Adjust image width for better visibility */
+    border-radius: 8px 8px 0 0;
+    margin-bottom: 10px; /* Space below image */
+    transition: transform 0.3s; /* Animation effect */
+}
+
+.card img:hover {
+    transform: scale(1.05); /* Zoom effect on image hover */
+}
+
+        .get-in-touch {
+            background-color: #28a745; /* Green background for button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Button shadow */
+        }
+
+        .get-in-touch:hover {
+            background-color: #218838; /* Darker green on hover */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Darker shadow on hover */
+        }
+
+        /* Footer styles */
+        .footer {
+            background-color: #007bff; /* Blue background */
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="IDBI Bank Logo"> <!-- Add your logo here -->
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+        </ul>
+    </nav>
+
+    <!-- Slider Section -->
+    <div class="slider">
+        <img src="bk1.avif" alt="Bank Slider" style="width: 100%; height: 35rem;">
+    </div>
+
+    <!-- Features Section -->
+    <h2 style="text-align: center; margin: 20px 0;">Features</h2>
+    <div class="features">
+        <div class="feature-box green">
+            <p><b>Accounts Services:</b></p>
+            <p>Account Summary (Operative/Loan/Deposits)</p>
+            <p>Enquiries like view balance / transaction history.</p>
+            <p>View / Download statement</p>
+            <p>Positive Pay : Confirm Cheque Details</p>
+            <p>Form 15G/H</p>
+            <p>Submit Re-KYC</p>
+            <p><b>Investments:</b></p>
+            <p>Open / Close Term Deposit</p>
+            <p>Purchase Insurance</p>
+            <p>Demat Services</p>
+            <p>Apply IPO / Rights Issue</p>
+        </div>
+        <div class="feature-box yellow">
+            <p><b>Online Instructions and Requests:</b></p>
+            <p>Complaint / Query Resolution Management</p>
+            <p>Aadhaar Linking Request</p>
+            <p>Request New Cheque Book / Stop Cheque</p>
+            <p>Register / Block Mobile Banking</p>
+            <p>FX- Remit Services</p>
+            <p>FASTag Services</p>
+            <p><b>Card Services:</b></p>
+            <p>Debit Card Services</p>
+            <p>Visa Card Payment</p>
+            <p>CMS Services</p>
+            <p>Account Services</p>
+            <p>App Services</p>
+        </div> 
+    </div>
+
+    <!-- Additional Information Section -->
+    <div class="additional-info">
+        <h2>24 Hours Banking - IDBI Bank Internet Banking</h2>
+        <ul style="list-style-type: disc; padding-left: 20px; text-align: left; max-width: 800px; margin: auto;">
+            <li>With the rapid digitalization happening around us and the Internet becoming an essential part of our daily lives, banking on an Internet platform assumes significant importance.</li>
+            <li>IDBI Bank provides its customers with 24-hour online banking services - anytime, anywhere.</li>
+            <li>You can perform all your banking transactions, including:</li>
+            <ul style="list-style-type: circle; padding-left: 20px;">
+                <li>Account Information</li>
+                <li>Demat Account Information</li>
+                <li>Online Instructions and Requests</li>
+                <li>Bill Payments</li>
+                <li>Merchant Payments</li>
+            </ul>
+            <li>Such services require security of the highest nature and complete privacy protection.</li>
+            <li>IDBI Bank provides a completely secure environment using 128-bit SSL (Secure Sockets Layer), digitally certified by VeriSign.</li>
+            <li>This ensures world-class security for Internet and e-commerce transactions.</li>
+        </ul>
+    </div>
+
+    <!-- How to Apply Section -->
+<div class="how-to-apply">
+    <h2>How to Apply</h2>
+    <div class="card">
+        <img src="i1.png" alt="Get In Touch"> <!-- Replace with your image URL -->
+        <h3>01. Get In Touch</h3>
+        <p>Call on our Phone Banking numbers Toll Free - 1800-209-4324</p>
+    </div>
+    <div class="card">
+        <img src="i2.png" alt="Visit Our Branch"> <!-- Replace with your image URL -->
+        <h3>02. Visit our Branch</h3>
+        <p>Visit the nearest branch. Find the Nearest Branch</p>
+    </div>
+    <div class="card">
+        <img src="i3.jpg" alt="Receive a Call Back"> <!-- Replace with your image URL --> 
+        <h3>03. Receive a Call Back</h3>
+        <p>Our representative will contact you at the earliest.</p>
+    </div> 
+    <button class="get-in-touch">Get in Touch</button>
+</div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Contact Us: 1800-209-4324 | 1800-22-1070 (24x7 service)</p>
+    </footer>
+
+</body>
+</html>

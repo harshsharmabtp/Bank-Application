@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education Loans</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #f4f4f4;
+        color: #333;
+    }
+
+    /* Navbar styling */
+    .navbar {
+        background: linear-gradient(90deg, #4a90e2, #0070ba);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        width: 100%;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .logo {
+        color: white;
+        font-size: 28px;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+
+    .nav-links {
+        list-style: none;
+        display: flex;
+    }
+
+    .nav-links li {
+        margin: 0 20px;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: white;
+        font-weight: 500;
+        transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+        color: #ffdd57;
+    }
+
+    /* Hero section styling */
+    .slider img {
+        width: 100%;
+        height: auto;
+        border-bottom: 5px solid #0070ba;
+    }
+
+    /* Loan details section */
+    .loan-details,
+    .apply-now,
+    .faq,
+    .testimonials,
+    .contact {
+        padding: 40px 20px;
+        margin: 40px 0;
+        background-color: white;
+        width: 80%;
+        max-width: 800px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        font-size: 26px;
+        color: #0070ba;
+    }
+
+    p,
+    li {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    ul {
+        padding-left: 20px;
+        text-align: left;
+    }
+
+    /* Apply Now section */
+    .apply-now form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .apply-now input {
+        margin: 10px 0;
+        padding: 12px;
+        border: 1px solid #ccc;
+        width: 100%;
+        max-width: 400px;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .apply-now button {
+        padding: 12px;
+        background-color: #0070ba;
+        color: white;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        max-width: 400px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        font-size: 16px;
+    }
+
+    .apply-now button:hover {
+        background-color: #005da8;
+    }
+
+    /* FAQ section */
+    .faq-item {
+        margin: 10px 0;
+    }
+
+    .faq-question {
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+
+    .faq-answer {
+        display: none;
+        padding-left: 20px;
+        font-size: 16px;
+    }
+
+    .faq-item.active .faq-answer {
+        display: block;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Download Brochure Button */
+    .brochure-button {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+    }
+
+    .brochure-button a {
+        padding: 15px 25px;
+        background-color: #0070ba;
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 500;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .brochure-button a:hover {
+        background-color: #005da8;
+    }
+
+    /* Testimonials section */
+    .testimonials {
+        background-color: #f9fafb;
+    }
+
+    .testimonial {
+        margin-bottom: 15px;
+        font-style: italic;
+    }
+
+    /* Footer styling */
+    footer {
+        background: linear-gradient(90deg, #4a90e2, #0070ba);
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+        width: 100%;
+        position: relative;
+    }
+</style>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">Logo</div>
+        <ul class="nav-links">
+            <li><a href="#">HOME</a></li>
+            <li><a href="#">SERVICES</a></li>
+            <li><a href="#">ABOUT</a></li>
+            <li><a href="#">CONTACT</a></li>
+        </ul>
+    </nav>
+
+    <!-- Image Slider -->
+    <div class="slider">
+        <img src="Studentloan.avif" alt="Slider Image" style="height: 31rem; width: 112rem;">
+    </div>
+
+    <!-- Loan Details Section -->
+    <section class="loan-details">
+        <h2>Loan Details</h2>
+        <ul>
+            <li>Interest Rate: Starting at 4.5%</li>
+            <li>Repayment Period: Up to 15 years</li>
+            <li>No Prepayment Penalty</li>
+            <li>Eligibility: Must be enrolled in a recognized institution</li>
+            <li>Disbursement: Funds released directly to the institution</li>
+            <li>Loan Amount: Up to $50,000</li>
+        </ul>
+        <p>We offer flexible education loans to help you achieve your academic goals.</p>
+    </section>
+
+    <!-- Apply Now Section -->
+    <section class="apply-now">
+        <h2>Apply Now</h2>
+        <form id="StudentLoanForm">
+            <input type="text" name="FullName" id="FullName" placeholder="Full Name" required>
+            <input type="email" name="Email" id="email" placeholder="Email" required>
+            <input type="number" name="Loan_Amount" id="number" placeholder="Loan Amount" required>
+            <input type="text" name="Course_of_Study" id="cos" placeholder="Course of Study" required>
+            <input type="text" name="Institution_Name" id="IS" placeholder="Institution Name" required>
+            <input type="text" name="Location" id="Location" placeholder="Location" required>
+            <button type="submit">Submit</button>
+        </form>
+        <div id="responseMessage"></div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <h2>FAQ</h2>
+        <div class="faq-item">
+            <h3 class="faq-question">What is the eligibility criteria?</h3>
+            <p class="faq-answer">You must be enrolled in a recognized institution.</p>
+        </div>
+        <div class="faq-item">
+            <h3 class="faq-question">How long does the approval process take?</h3>
+            <p class="faq-answer">It typically takes 3-5 business days for the approval process.</p>
+        </div>
+        <div class="faq-item">
+            <h3 class="faq-question">Can I repay the loan early?</h3>
+            <p class="faq-answer">Yes, there is no prepayment penalty. You can repay the loan early without any additional charges.</p>
+        </div>
+        <div class="faq-item">
+            <h3 class="faq-question">Is there a maximum loan amount?</h3>
+            <p class="faq-answer">Yes, you can borrow up to $50,000 based on your eligibility.</p>
+        </div>
+        <div class="faq-item">
+            <h3 class="faq-question">What is the interest rate?</h3>
+            <p class="faq-answer">The interest rate starts at 4.5%, depending on your credit score and loan amount.</p>
+        </div>
+        <div class="faq-item">
+            <h3 class="faq-question">When do I need to start repayment?</h3>
+            <p class="faq-answer">Repayment starts after graduation or after you are no longer enrolled in the institution.</p>
+        </div>
+    </section>
+
+    <!-- Download Brochure Button -->
+    <div class="brochure-button">
+        <a href="education-loan-form.pdf" download>Download Form</a>
+    </div>
+
+    <!-- Client Testimonials Section -->
+    <section class="testimonials">
+        <h2>What Our Clients Say</h2>
+        <div class="testimonial">
+            <p>"The loan process was seamless and helped me achieve my education goals!" - Client A</p>
+        </div>
+        <div class="testimonial">
+            <p>"I am grateful for the support and flexibility offered by this loan service." - Client B</p>
+        </div>
+        <div class="testimonial">
+            <p>"The team was very helpful and guided me throughout the process." - Client C</p>
+        </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section class="contact">
+        <h2>Contact Us</h2>
+        <p>If you have any further questions, feel free to reach out to us:</p>
+        <p>Email: <a href="mailto:support@educationloans.com">support@educationloans.com</a></p>
+        <p>Phone: <a href="tel:18005550199">1-800-555-0199</a></p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Education Loans. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('StudentLoanForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent default form submission
+        
+            // Collect form data
+            const FullName = document.getElementById('FullName').value;
+            const Email = document.getElementById('email').value;
+            const Loan_Amount = document.getElementById('number').value;
+            const Course_of_Study = document.getElementById('cos').value;
+            const Institution_Name = document.getElementById('IS').value;
+            const location = document.getElementById('Location').value;
+        
+            try {
+                const response = await fetch('/api-auth/studentLoan', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        FullName,
+                        Email,
+                        Loan_Amount,
+                        Course_of_Study,
+                        Institution_Name,
+                        location
+                    })
+                });
+        
+                const data = await response.json();
+                // Display success message from the response
+                document.getElementById('responseMessage').innerText = data.message;
+            } catch (error) {
+                document.getElementById('responseMessage').innerText = 'Error submitting application';
+            }
+        });
+    
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                question.parentElement.classList.toggle('active');
+            });
+        });
+    </script>
+
+</body>
+
+</html>

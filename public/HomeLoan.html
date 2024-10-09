@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #007bff;
+            display: flex;
+            align-items: center;
+            padding: 15px 30px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .logo {
+            margin-right: auto;
+            /* Pushes the items to the center */
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            /* Center the navbar items */
+            flex-grow: 1;
+            /* Allows the navbar items to take up available space */
+        }
+
+        .navbar ul li {
+            margin-right: 20px;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            background-color: white;
+            color: #007bff;
+        }
+
+        /* Slider */
+        .slider-container {
+            max-width: 100%;
+            height: 60vh;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 1s ease-in-out;
+        }
+
+        .slides img {
+            width: 100%;
+            object-fit: cover;
+        }
+
+        /* Sections */
+        .section {
+            padding: 60px 20px;
+        }
+
+        .section h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 28px;
+            color: #007bff;
+        }
+
+        /* Cards */
+        .card-row {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background-color: #007bff;
+            /* Set background to blue */
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            flex: 1;
+            margin: 10px;
+            transition: transform 0.3s ease;
+            color: white;
+            /* Set text color to white */
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card img {
+            max-width: 285px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: white;
+            /* Set heading color to white */
+        }
+
+        .card p {
+            font-size: 16px;
+            color: white;
+            /* Set paragraph color to white */
+        }
+
+        /* FAQ Section */
+        .faq {
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+        }
+
+        .faq-item button {
+            background-color: #007bff;
+            color: white;
+            width: 100%;
+            padding: 15px;
+            text-align: left;
+            font-size: 18px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-item button:hover {
+            background-color: #0056b3;
+        }
+
+        .faq-item button:after {
+            content: '\002B';
+            /* Plus symbol */
+            float: right;
+        }
+
+        .faq-item button.active:after {
+            content: '\2212';
+            /* Minus symbol */
+        }
+
+        .faq-item .answer {
+            display: none;
+            background-color: white;
+            padding: 15px;
+            font-size: 16px;
+            border-left: 3px solid #007bff;
+            border-radius: 0 0 10px 10px;
+            color: #333;
+            /* Set FAQ answer color to dark */
+        }
+
+        .faq-item .answer p {
+            margin: 0;
+        }
+
+        /* Buttons */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            margin: 0 10px;
+        }
+
+        .btn:hover {
+            
+            color: white;
+        }
+
+
+
+
+
+
+
+
+
+
+
+         /* Advantage Slider Styles */
+    .advantage-slider-container {
+        width: 100%;
+        height: 400px;
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: url('advantage-bg.jpg') no-repeat center center/cover; /* Replace with your background image */
+        position: relative;
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .advantage-slide {
+        max-width: 800px;
+        background-color: rgba(0, 123, 255, 0.8); /* Blue overlay background */
+        border-radius: 10px;
+        padding: 40px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        color: white;
+    }
+
+    .advantage-slide h2 {
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+
+    .advantage-slide p {
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+
+    /* Advantage Button */
+    .advantage-btn {
+        background-color: white;
+        color: #007bff;
+        padding: 15px 30px;
+        border-radius: 5px;
+        font-size: 18px;
+        text-decoration: none;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .advantage-btn:hover {
+        background-color: #007bff;
+        color: white;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <img src="logo.png" alt="Logo" class="logo" style="height: 40px;">
+        <!-- Add your logo image here -->
+        <ul>
+            <li><a href="#">HOME</a></li>
+            <li><a href="#">CONTACT</a></li>
+            <li><a href="#">SERVICES</a></li>
+            <li><a href="#">ABOUT</a></li>
+        </ul>
+    </nav>
+
+    <!-- Slider -->
+    <div class="slider-container">
+        <div class="slides">
+            <img src="hl.avif" alt="Slider Image 1" style="width: 100%; height: 31rem; margin-left: 0rem;">
+        </div>
+    </div>
+
+    <!-- Eligibility Section -->
+    <div class="section">
+        <h2>Eligibility</h2>
+        <div class="card-row">
+            <div class="card">
+                <img src="icon1.avif" alt="Eligibility Icon 1">
+                <h3>Salaried (NRIS/PIOS)</h3>
+                <p>Minimum age of the Applicant:22 Years</p>
+                <p>Maximum age of the Applicant (At Loan Maturity):70 Years or retirement age <br>whichever is earlier(Subject
+                    to submission of proof for continuity of income) </p>
+            </div>
+            <div class="card">
+                <img src="icon2.jpg" alt="Eligibility Icon 2">
+                <h3>Self Employeed professionals/Non professionals</h3>
+                <p>Minimum age of the Applicant:25s Years</p>
+                <p>Maximum age of the Applicant (At Loan Maturity):65 Years or retirement age <br>whichever is earlier(Subject
+                    to submission of proof for continuity of income) </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Documentation Section -->
+    <div class="section">
+        <h2>Documentation</h2>
+        <div class="card-row">
+            <div class="card">
+                <img src="ap1.png" alt="Document Icon 1" style="height:17rem;">
+                <h3>Application Form</h3>
+                <p>Application form with photograph</p>
+            </div>
+            <div class="card">
+                <img src="ap2.png" alt="Document Icon 2" style="height:17rem;">
+                <h3>Identity & Address Proof</h3>
+                <p>dentity and Residence Proof</p>
+            </div>
+            <div class="card">
+                <img src="ap3.png" alt="Document Icon 3" style="height:17rem;">
+                <h3>Bank Statement</h3>
+                <p>Latest Salary-slip for last 3 months</p>
+            </div>
+            <div class="card">
+                <img src="ap4.jpg" alt="Document Icon 4" style="height:17rem;">
+                <h3>Tax Returns</h3>
+                <p>Form 16/ITR</p>
+            </div>
+            <div class="card">
+                <img src="ap5.jpg" alt="Document Icon 5" style="height:17rem;">
+                <h3>Bank Statement</h3>
+                <p>Last 6 months bank statement Processing fee cheque</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- How to Apply Section -->
+    <div class="section">
+        <h2>How to Apply</h2>
+        <div class="card-row">
+            <div class="card">
+                <img src="bd1.jpg" alt="Apply Icon 1" style="height:16rem;">
+                <h3>01. Basic Details</h3>
+                <p>Provide your basic details to help us know you better.</p>
+            </div>
+            <div class="card">
+                <img src="bd2.avif" alt="Apply Icon 2" style="height:16rem;">
+                <h3>02. Check Eligibility</h3>
+                <p>Determine your eligibility to get a Home Loan.</p>
+            </div>
+            <div class="card">
+                <img src="bd3.jpg" alt="Apply Icon 3" style="height:16rem;">
+                <h3>03. Submit Documents</h3>
+                <p>Documents such as residential proof, income and, employment details.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Buttons Section (Added) -->
+  <!-- Buttons Section (Modified) -->
+<div class="btn-container">
+    <!-- Button for opening a PDF in a new tab -->
+    <a href="homeloan.pdf" target="_blank" class="btn">More Information</a>
+    
+    <!-- Button for downloading a PDF -->
+    <a href="Home-Loan-Application-Form.pdf" download="Form.pdf" class="btn">Download Form</a>
+</div>
+
+<!-- Advantage Slider Section -->
+<div class="advantage-slider-container">
+    <div class="advantage-slide">
+        <div class="advantage-content">
+            <h2>Why Choose Our Home Loan?</h2>
+            <p>With flexible terms, easy application process, and competitive interest rates, our home loans are designed to help you achieve your dreams.</p>
+            <a href="Eligibility.html" class="advantage-btn">Check Eligibility</a>
+        </div>
+    </div>
+</div>
+    <!-- FAQ Section -->
+    <div class="section faq">
+        <h2>FAQ'S</h2>
+        <div class="faq-item">
+            <button>How will IDBI Bank decide my Home Loan Eligibility?</button>
+            <div class="answer">
+                <p>We will assess your loan eligibility based on your age, qualification, income, number of dependents, spouse
+                    income, stability and continuity of your occupation, assets, liability base and your savings history and
+                    based on the value of the property proposed to be purchased.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <button>Can I get the Home Loan eligibility without selecting the property?</button>
+            <div class="answer">
+                <p>Yes. We can extend in-principle sanction based on your repayment capacity. Accordingly based on the loan
+                    amount sanctioned, you may search the property. For final sanction, property identified for the purpose
+                    should meet our criteria.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <button>What is the maximum Loan tenure that I can have under IDBI Home Loan?</button>
+            <div class="answer">
+                <p>IDBI Home Loans have maximum repayment tenure of up to 30 years. Actual tenure of loan is subjected to
+                    bank’s discretion.</p>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+     <!-- Footer Section -->
+     <footer style="background-color: white; padding: 20px 0; text-align: center;">
+        <div class="footer-container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <h3>Quick Links</h3>
+            <ul style="list-style: none; padding: 0; margin: 10px 0;">
+                <li style="display: inline; margin-right: 15px;"><a href="#" style="text-decoration: none; color: #007bff;">Home</a></li>
+                <li style="display: inline; margin-right: 15px;"><a href="#" style="text-decoration: none; color: #007bff;">Services</a></li>
+                <li style="display: inline; margin-right: 15px;"><a href="#" style="text-decoration: none; color: #007bff;">Contact</a></li>
+                <li style="display: inline; margin-right: 15px;"><a href="#" style="text-decoration: none; color: #007bff;">About</a></li>
+            </ul>
+            <p style="color: #333;">&copy; 2024 Your Company Name. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+
+    
+
+    <script>
+        const faqButtons = document.querySelectorAll('.faq-item button');
+
+        faqButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                this.classList.toggle('active');
+
+                const answer = this.nextElementSibling;
+                if (answer.style.display === 'block') {
+                    answer.style.display = 'none';
+                } else {
+                    answer.style.display = 'block';
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

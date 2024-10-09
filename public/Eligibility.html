@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Eligibility Checker</title>
+    <style>
+        body {
+            background-color: rgb(241, 241, 245);
+            color: rgb(34, 8, 8);
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-size: 1rem;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .back-button {
+            position: absolute; /* Absolute positioning */
+            top: 20px; /* Distance from top */
+            left: 20px; /* Distance from left */
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: bold; /* Bold text for button */
+            border-radius: 5px; /* Slightly rounded corners */
+            font-size: 16px; /* Slightly larger font size */
+        }
+        .check-eligibility {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: bold; /* Bold text for button */
+            border-radius: 5px; /* Slightly rounded corners */
+            font-size: 16px; /* Slightly larger font size */
+        }
+        .form-field {
+            margin-bottom: 15px;
+            width: 300px; /* Fixed width for uniformity */
+        }
+        .form-field label {
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
+    <script>
+        function checkEligibility() {
+            const experience = parseInt(document.getElementById('experience').value, 10);
+            let message = '';
+            if (experience <= 4 && experience == '') {
+                message = 'Not Eligible for loan';
+            } else {
+                message = 'Eligible for loan';
+            }
+            alert(message);
+        }
+    </script>
+</head>
+<body>
+
+    <button class="back-button" onclick="window.history.back();">Back</button>
+
+    <h1>Loan Eligibility Checker</h1>
+
+    <div class="form-field">
+        <label for="first-name">First Name:</label>
+        <input type="text" id="first-name" required>
+    </div>
+
+    <div class="form-field">
+        <label for="second-name">Second Name:</label>
+        <input type="text" id="second-name" required>
+    </div>
+
+    <div class="form-field">
+        <label for="mobile-number">Mobile Number:</label>
+        <input type="tel" id="mobile-number" required>
+    </div>
+
+    <div class="form-field">
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" required>
+    </div>
+
+    <div class="form-field">
+        <label for="employment-type">Employment Type:</label>
+        <select id="employment-type">
+            <option value="salary">Salary</option>
+            <option value="self-employed-business">Self Employed Business</option>
+            <option value="self-employed-professional">Self Employed Professional</option>
+        </select>
+    </div>
+
+    <div class="form-field">
+        <label for="experience">Total Work Experience (in years):</label>
+        <input type="number" id="experience" required>
+    </div>
+
+    <button class="check-eligibility" onclick="checkEligibility()">Check Eligibility</button>
+
+</body>
+</html>

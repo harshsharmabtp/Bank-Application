@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page with Navbar and Full-Width Slider</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            background-color: #007bff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav-links a:hover {
+            background-color: white;
+            color: #007bff;
+        }
+
+        .auth-buttons {
+            display: flex;
+        }
+
+        .auth-buttons a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px 20px;
+            margin-left: 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .auth-buttons a:hover {
+            background-color: white;
+            color: #007bff;
+        }
+
+        /* Slider styles */
+        .slider-container {
+            position: relative;
+            max-width: 100%;
+            height: 50vh;
+            margin-top: 70px; /* Offset to account for fixed navbar */
+            overflow: hidden;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 2s ease-in-out; /* Slower transition duration */
+            width: 400%;
+            height: 100%;
+        }
+
+        .slides img {
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        /* Card styles */
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .card {
+            background-color: #007bff;
+            color: white;
+            border-radius: 8px;
+            width: calc(33.33% - 20px);
+            margin: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-button {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+            font-size: 16px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 15px;
+        }
+
+        .card-button:hover {
+            background-color: white;
+            color: #007bff;
+        }
+
+        /* Hover effect for Digital Banking Cards */
+        .digital-banking-cards .card {
+            cursor: pointer;
+        }
+
+        .digital-banking-cards .card:hover {
+            transform: translateY(-5px);
+            background-color: #0056b3; /* Slight color change on hover */
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .card {
+                width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                width: calc(100% - 20px);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*.new-slider-container {
+            position: relative;
+            max-width: 100%;
+            height: 50vh;
+            margin-top: 30px;
+            overflow: hidden;
+        }
+
+        .new-slides {
+            display: flex;
+            transition: transform 1s ease-in-out;
+            width: 300%;
+            height: 100%;
+        }
+
+        .new-slides img {
+            width: 113rem;
+            height: 26rem;
+        }
+
+        .new-slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .new-prev {
+            left: 10px;
+        }
+
+        .new-next {
+            right: 10px;
+        }
+
+        /* Checkbook request section */
+        .checkbook-section {
+            text-align: center;
+            margin: 30px 0;
+            background-color: #007bff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .checkbook-button {
+            background-color: #007bff;
+            color: white;
+            font-size: 18px;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s, color 0.3s;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .checkbook-button:hover {
+            background-color: white;
+            color: #007bff;
+            border: 2px solid #007bff;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="auth-buttons">
+            <a href="Register.html">Register</a>
+            <a href="login.html">Login</a>
+        </div>
+    </nav>
+
+    <!-- Slider -->
+    <div class="slider-container">
+        <div class="slides">
+            <img src="ml1.png" alt="Image 1">
+            <img src="slk2.png" alt="Image 2">
+            <img src="slk3.jpg" alt="Image 3" style="height: 82rem; width: 100%; margin-top: -55rem;">
+            <img src="slk4.jpeg" alt="Image 4">
+        </div>
+        
+    </div>
+
+    <!-- Cards Section -->
+    <div class="cards-container">
+        <div class="card">
+            <h3>Home Loan</h3>
+            <a href="HomeLoan.html" class="card-button">Know More</a>
+            <a href="Home-Loan-Application-Form.pdf" class="card-button">Apply Now</a>
+        </div>
+        <div class="card">
+            <h3>Interest Rates</h3>
+            <a href="interestRate.html" class="card-button">Know More</a>
+            <a href="#" class="card-button">Apply Now</a>
+        </div>
+        <div class="card">
+            <h3>Gold Loan</h3>
+            <a href="goldLoan.html" class="card-button">Know More</a>
+            <a href="goldLoanApplication.pdf" class="card-button">Apply Now</a>
+        </div>
+        <div class="card">
+            <h3>Savings Account</h3>
+            <a href="#" class="card-button">Know More</a>
+            <a href="#" class="card-button">Apply Now</a>
+        </div>
+        <div class="card">
+            <h3>Student Education Loan</h3>
+            <a href="StudentLoan.html" class="card-button">Know More</a>
+            <a href="#" class="card-button">Apply Now</a>
+        </div>
+        <div class="card">
+            <h3>Senior Citizen Accounts</h3>
+            <a href="#" class="card-button">Know More</a>
+            <a href="#" class="card-button">Apply Now</a>
+        </div>
+    </div>
+
+    <!-- Digital Banking Heading -->
+    <h2 style="text-align: center; margin-top: 40px;">Digital Banking</h2>
+
+    <!-- Digital Banking Cards and Image Section -->
+    <div class="digital-banking-container" style="display: flex; justify-content: space-between; align-items: flex-start; margin-top: 30px; padding: 20px;">
+        <!-- Cards Section (Left Side) -->
+        <div class="digital-banking-cards" style="flex: 0 0 70%; display: flex; flex-wrap: wrap;">
+            <!-- 8 Cards in total, 3 cards per row -->
+            <div class="card" style="width: calc(33.33% - 20px); margin: 10px;" onclick="location.href='internetBanking.html'">
+                <h3>Internet Banking</h3>
+                <img src="ib1.avif" alt="Card 1 Image" style="width: 100%; margin-top: 10px; border-radius: 8px;">
+            </div>
+            <div class="card" style="width: calc(33.33% - 20px); margin: 10px;" onclick="location.href=''">
+                <h3>Whatsapp Banking</h3>
+                <img src="ib2.avif" alt="Card 2 Image" style="width: 101%;
+    margin-top: 10px;
+    border-radius: 8px;
+    height: 26rem;">
+            </div>
+            <div class="card" style="width: calc(33.33% - 20px); margin: 10px;" onclick="location.href='fastag.html'">
+                <h3>Fastag</h3>
+                <img src="ib3.webp" alt="Card 4 Image" style="width: 101%;
+    margin-top: 10px;
+    border-radius: 8px;
+    height: 26rem;">
+            </div>
+            <div class="card" style="width: calc(33.33% - 20px); margin: 10px;" onclick="location.href='page4.html'">
+                <h3>Vedio <br> Rekyc</h3>
+                
+            </div>
+            <div class="card" style="width: calc(33.33% - 20px); margin: 10px;" onclick="location.href='page5.html'">
+                <h3>Soft <br> Token</h3>
+                <!-- <img src="image7.png" alt="Card 7 Image" style="width: 100%; margin-top: 10px; border-radius: 8px;"> -->
+            </div>
+            <div class="card" style="width: calc(33.33% - 20px); margin: 10px;" onclick="location.href='page6.html'">
+                <h3>Generate Debit <br> Card Pin </h3>
+                
+            </div>
+        </div>
+
+        <!-- Image Section (Right Side) -->
+        <div class="digital-banking-image" style="flex: 0 0 25%; display: flex; justify-content: center; align-items: center;">
+            <img src="digiBank.avif" alt="Digital Banking" style="max-width: 101%;
+    border-radius: 36px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 38rem;;">
+        </div>
+    </div>
+ <!-- Digital Banking Heading and Content -->
+
+    <!-- New Slider Section -->
+    <div class="new-slider-container">
+        <div class="new-slides">
+            <!-- <img src="checkbook.avif" alt="Slider Image 1"> -->
+            
+        </div>
+       </div>
+
+   <!-- Checkbook Request Section -->
+<div class="checkbook-section" 
+style="background-image: url('checkbook.avif'); 
+       background-size: cover; 
+       background-position: center; 
+       padding: 50px; 
+       border-radius: 15px; 
+       box-shadow: 0 4px 15px rgba(230, 225, 225, 0.2); 
+       color: rgb(54, 42, 42); 
+       text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); 
+       background-repeat: no-repeat; /* Ensure no repetition */
+       background-attachment: fixed; /* Makes background stay fixed while scrolling */
+       min-height: 400px;"> <!-- Adjust the height as necessary -->
+
+<h2 style="font-size: 2.5rem; font-family: 'Georgia', serif; letter-spacing: 1px;">
+    Request a Checkbook
+</h2>
+
+<p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto;">
+    Need a new checkbook? It's simple and quick! Click the button below and fill out the form to receive your checkbook at your doorstep.
+</p>
+
+<a href="checkbook.html" 
+   class="checkbook-button" 
+   style="background-color: #007bff; 
+          color: white; 
+          font-size: 20px; 
+          padding: 15px 40px; 
+          border-radius: 50px; 
+          text-shadow: none; 
+          font-weight: bold; 
+          transition: transform 0.3s, box-shadow 0.3s; 
+          margin-top: 30px; 
+          display: inline-block;">
+    Request Checkbook
+</a>
+</div>
+
+    
+       <!-- New Bank Rules 2024 Section -->
+<div class="new-bank-rules-section" 
+style="background-color: #ffffff; 
+       padding: 60px; 
+       margin-top: 50px; 
+       border-radius: 20px; 
+       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); 
+       background-image: linear-gradient(to right, #e0f7fa, #ffffff); 
+       transition: transform 0.3s ease-in-out;">
+
+<h2 style="text-align: center; 
+          font-size: 3rem; 
+          font-family: 'Georgia', serif; 
+          margin-bottom: 40px; 
+          color: #007bff;">
+   New Bank Rules <span style="color: #28a745;">2024</span>
+</h2>
+
+<ul style="list-style-type: none; 
+          max-width: 900px; 
+          margin: 0 auto; 
+          font-size: 1.4rem; 
+          line-height: 2; 
+          color: #333; 
+          padding: 0;">
+
+   <!-- List Item -->
+   <li style="display: flex; 
+              align-items: flex-start; 
+              margin-bottom: 25px; 
+              padding: 15px; 
+              background-color: #f9f9f9; 
+              border-radius: 10px; 
+              box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); 
+              transition: background-color 0.3s ease, transform 0.3s ease;">
+       <span style="color: #28a745; 
+                    margin-right: 15px; 
+                    font-size: 2rem; 
+                    transition: transform 0.3s ease;">&#10004;</span>
+       <div>
+           <strong>Increased Digital Security:</strong> Enhanced encryption and multi-factor authentication (MFA) for all digital banking transactions to prevent fraud and unauthorized access.
+       </div>
+   </li>
+
+   <!-- List Item -->
+   <li style="display: flex; 
+              align-items: flex-start; 
+              margin-bottom: 25px; 
+              padding: 15px; 
+              background-color: #f9f9f9; 
+              border-radius: 10px; 
+              box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); 
+              transition: background-color 0.3s ease, transform 0.3s ease;">
+       <span style="color: #28a745; 
+                    margin-right: 15px; 
+                    font-size: 2rem; 
+                    transition: transform 0.3s ease;">&#10004;</span>
+       <div>
+           <strong>Revised Interest Rates:</strong> New savings account interest rates come into effect from January 2024, with competitive rates for both short-term and long-term deposits.
+       </div>
+   </li>
+
+   <!-- List Item -->
+   <li style="display: flex; 
+              align-items: flex-start; 
+              margin-bottom: 25px; 
+              padding: 15px; 
+              background-color: #f9f9f9; 
+              border-radius: 10px; 
+              box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); 
+              transition: background-color 0.3s ease, transform 0.3s ease;">
+       <span style="color: #28a745; 
+                    margin-right: 15px; 
+                    font-size: 2rem; 
+                    transition: transform 0.3s ease;">&#10004;</span>
+       <div>
+           <strong>Debit Card Usage Policy:</strong> Updated guidelines for international debit card transactions, including daily withdrawal limits and foreign transaction fees.
+       </div>
+   </li>
+
+   <!-- List Item -->
+   <li style="display: flex; 
+              align-items: flex-start; 
+              margin-bottom: 25px; 
+              padding: 15px; 
+              background-color: #f9f9f9; 
+              border-radius: 10px; 
+              box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); 
+              transition: background-color 0.3s ease, transform 0.3s ease;">
+       <span style="color: #28a745; 
+                    margin-right: 15px; 
+                    font-size: 2rem; 
+                    transition: transform 0.3s ease;">&#10004;</span>
+       <div>
+           <strong>Fee Adjustments:</strong> Minimal changes in banking service fees for account maintenance, ATM usage, and overdraft services, with a clear breakdown of charges for transparency.
+       </div>
+   </li>
+
+
+
+ 
+   
+   </li>
+</ul>
+</div>
+
+
+</body>
+</html>

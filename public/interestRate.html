@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>User Info</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    /* Navbar Styles */
+    .navbar {
+      background-color: #007BFF;
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar a {
+      color: white;
+      padding: 14px 20px;
+      text-decoration: none;
+      text-align: center;
+      transition: background-color 0.3s;
+    }
+
+    .navbar a:hover {
+      background-color: white;
+      color: #007BFF;
+    }
+
+    .logo {
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      height: 50px;
+    }
+
+    /* Slider Styles */
+    .slider {
+      position: relative;
+      width: 100%;
+      max-height: 400px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .slide {
+      min-width: 100%;
+      max-height: 400px;
+    }
+
+    .slider img {
+      width: 101%;
+    height: 29rem;
+    }
+
+    /* Overview Styles */
+    .overview {
+      text-align: center;
+      margin: 40px auto;
+      padding: 20px; /* Added padding */
+      max-width: 800px; /* Constrain width for better readability */
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .overview h2 {
+      margin-bottom: 20px;
+      color: #333; /* Darker color for better readability */
+    }
+
+    /* Table Styles */
+    #user-info {
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 600px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    /* Button Styles */
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+      color: white;
+      background-color: #4CAF50;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    /* Footer Styles */
+    footer {
+      background-color: #007BFF;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+    }
+
+    /* Tracker Styles */
+    .tracker {
+      position: fixed;
+      right: 20px;
+      top: 100px;
+      background-color: #007BFF;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Navigation dots for the slider */
+    .dots {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .dot {
+      height: 15px;
+      width: 15px;
+      margin: 0 2px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .active {
+      background-color: #717171;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <a href="#home">Home</a>
+    <a href="#contact">Contact</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+  </div>
+
+  <!-- Logo -->
+  <img src="logo.png" alt="Logo" class="logo"> <!-- Replace with your logo path -->
+
+  <!-- Slider -->
+  <div class="slider">
+    <div class="slides">
+      <div class="slide"><img src="interestratepic.avif" alt="Slider Image 1"></div> <!-- Replace with your slider images -->
+    </div>
+  </div>
+
+  <!-- Overview Section -->
+  <div class="overview">
+    <h2>Overview</h2>
+    <p>This section provides a comprehensive overview of our services and interest rates, aimed at helping you make informed financial decisions. We prioritize transparency and customer satisfaction in all our offerings.</p>
+    <p>Our interest rates are competitive and designed to meet the needs of our customers. We strive to provide excellent service and support throughout your banking experience.</p>
+    <p>Explore our range of services tailored to fit your financial goals and aspirations.</p>
+  </div>
+
+  <!-- Savings Bank Rate Section -->
+  <div class="overview">
+    <h2>Savings Bank Rate (w.e.f. August 01, 2024)</h2>
+    <button id="know-more">Know More</button>
+    <div id="user-info" style="display: none;">
+      <table id="user-table">
+        <thead>
+          <tr>
+            <th>Saving Balance</th>
+            <th>Rate of Interest</th>
+          </tr>
+        </thead>
+        <tbody id="user-body"></tbody>
+      </table>
+    </div>
+    <p>Note:</p>
+    <p>MIBOR linked floating Saving Bank Rate (w.e.f December 04, 2023) will be applicable on the entire balance (all rates applicable on the end of the day balance) if the balance exceeds Rs 1000 cr. based on the slab as above.</p>
+    <p>For more details on the MIBOR Linked Floating Interest rate, please contact your Relationship Manager or visit your nearest IDBI Bank Branch.</p>
+    <p>With effect from February 1, 2021, Interest Rate on Savings Deposits is calculated on the basis of incremental balance slabs.</p>
+  </div>
+
+  <!-- MCLR Section -->
+  <!-- MCLR Section -->
+  <div class="overview">
+    <h2>Savings Bank Rate (w.e.f. August 01, 2024)</h2>
+    <button id="know-more">Know More</button>
+    <div id="mclr-info" style="display: none;">
+      <table id="mclr-table">
+        <thead>
+          <tr>
+            <th>Saving Balance</th>
+            <th>Rate of Interest</th>
+          </tr>
+        </thead>
+        <tbody id="mclr-body"></tbody>
+      </table>
+    </div>
+    <p>Note:</p>
+    <p>MIBOR linked floating Saving Bank Rate (w.e.f December 04, 2023) will be applicable on the entire balance (all rates applicable on the end of the day balance) if the balance exceeds Rs 1000 cr. based on the slab as above.</p>
+    <p>For more details on the MIBOR Linked Floating Interest rate, please contact your Relationship Manager or visit your nearest IDBI Bank Branch.</p>
+    <p>With effect from February 1, 2021, Interest Rate on Savings Deposits is calculated on the basis of incremental balance slabs.</p>
+  </div>
+
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 Your Bank Name. All rights reserved.</p>
+  </footer>
+
+  <!-- Tracker -->
+  <div class="tracker">
+    <h3>Quick Links</h3>
+    <p><a href="#home" style="color: white;">Home</a></p>
+    <p><a href="#contact" style="color: white;">Contact</a></p>
+    <p><a href="#about" style="color: white;">About</a></p>
+    <p><a href="#services" style="color: white;">Services</a></p>
+  </div>
+
+  <script>
+    
+
+    document.getElementById('know-more').addEventListener('click', async () => {
+      try {
+        const response = await fetch('http://localhost:14000/api/interestrates'); // Use the correct URL
+        const itrs = await response.json();
+
+        // If there is an error with the request
+        if (response.status !== 200) {
+          throw new Error(itrs.message);
+        }
+
+        // Generate HTML rows for each interest rate
+        const userRows = itrs.map(itr => `
+          <tr>
+            <td>${itr.Saving_Balance}</td>
+            <td>${itr.ROI}</td>
+          </tr>
+        `).join('');
+
+        // Insert the user rows into the table body
+        document.getElementById('user-body').innerHTML = userRows;
+        document.getElementById('user-info').style.display = 'block'; // Show the user info
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    });
+
+    // For the MCLR button if you want to implement similar functionality
+    document.getElementById('know-more-mclr').addEventListener('click', async () => {
+      try {
+        const response = await fetch('http://localhost:14000/api/interestratesptr'); // Ensure correct URL
+        //console.log('Response status:', response.status); // Log status for debugging
+        const mclrData = await response.json();
+    
+        // Check for successful response
+        if (response.status !== 200) {
+          throw new Error(mclrData.message);
+        }
+    
+        // Generate HTML for MCLR data
+        const mclrRows = mclrData.map(item => `
+          <tr>
+            <td>${item.Tenor}</td>
+            <td>${item.MCLR}</td>
+          </tr>
+        `).join('');
+    
+        // Update the mclr-results section and show it
+        document.getElementById('mclr-body').innerHTML = mclrRows;
+        document.getElementById('mclr-info').style.display = 'block'; // Show results
+      } catch (error) {
+        console.error('Error fetching MCLR data:', error);
+      }
+    });
+    
+  </script>
+</body>
+</html>

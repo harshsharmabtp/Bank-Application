@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Multi-step Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        /* Styles for the progress bar */
+        .progress {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 25px;
+            margin-bottom: 20px;
+            height: 25px;
+        }
+        .progress-bar {
+            width: 0;
+            height: 100%;
+            background-color: #4caf50;
+            border-radius: 25px;
+            transition: width 0.4s ease;
+        }
+
+        .form-step {
+            display: none;
+        }
+        .form-step.active {
+            display: block;
+        }
+
+        input[type="text"], input[type="email"], input[type="date"], input[type="number"], select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Tracker style */
+        .tracker {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .tracker-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .tracker-step.active {
+            font-weight: bold;
+            color: #4caf50;
+        }
+
+        .tracker-line {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            height: 2px;
+            background-color: #4caf50;
+            transition: width 0.4s ease;
+        }
+
+        .tracker-line.hidden {
+            display: none;
+        }
+
+        .tracker-step:first-child .tracker-line {
+            width: 50%;
+            left: 100%;
+        }
+        
+        .tracker-step:last-child .tracker-line {
+            width: 50%;
+            left: 0;
+        }
+
+        /* CAPTCHA styles */
+        .captcha-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .captcha {
+            font-weight: bold;
+            font-size: 24px;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="tracker">
+        <div class="tracker-step active">
+            Step 1
+            <div class="tracker-line"></div>
+        </div>
+        <div class="tracker-step">
+            Step 2
+            <div class="tracker-line hidden"></div>
+        </div>
+        <div class="tracker-step">
+            CAPTCHA
+            <div class="tracker-line hidden"></div>
+        </div>
+    </div>
+
+    <div class="progress">
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+
+    <div id="form-steps">
+        <div class="form-step active">
+            <h2>Step 1: Vehicle Information</h2>
+            <form id="form-step-1">
+                <input type="email" placeholder="Email" name="email" required>
+                <select name="vehicleClass" required>
+                    <option value="" disabled selected>Select Vehicle Class</option>
+                    <option value="Sedan">Sedan</option>
+                    <option value="SUV">SUV</option>
+                    <option value="Truck">Truck</option>
+                    <option value="Van">Van</option>
+                    <option value="Motorcycle">Motorcycle</option>
+                </select>
+                <input type="date" placeholder="Date" name="date" required>
+                <input type="text" placeholder="Registration Number" name="regNumber" required>
+                <input type="text" placeholder="RFID Number" name="rfidNumber" required>
+                <button type="button" onclick="nextStep(2)">Next</button>
+            </form>
+        </div>
+        
+        <div class="form-step">
+            <h2>Step 2: Payment Information</h2>
+            <form id="form-step-2">
+                <input type="text" placeholder="Card Number" name="cardNumber" required>
+                <input type="text" placeholder="Merchant Name" name="merchantName" required>
+                <input type="number" placeholder="Amount" name="amount" required>
+                <button type="button" onclick="nextStep(3)">Next</button>
+            </form>
+        </div>
+
+        <div class="form-step">
+            <h2>CAPTCHA Verification</h2>
+            <div class="captcha-container">
+                <div id="captcha" class="captcha"></div>
+                <input type="text" id="captcha-input" placeholder="Enter CAPTCHA" required>
+            </div>
+            <button type="button" onclick="submitForm()">Submit</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentStep = 1;
+    let generatedCaptcha;
+
+    // Generate a random CAPTCHA
+    function generateCaptcha() {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let captcha = '';
+        for (let i = 0; i < 6; i++) {
+            captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return captcha;
+    }
+
+    // Display CAPTCHA
+    function displayCaptcha() {
+        generatedCaptcha = generateCaptcha();
+        document.getElementById('captcha').textContent = generatedCaptcha;
+    }
+
+    function nextStep(step) {
+        document.querySelector(`.form-step.active`).classList.remove('active');
+        document.querySelector(`.tracker-step.active`).classList.remove('active');
+        currentStep = step;
+        document.querySelector(`.form-step:nth-of-type(${currentStep})`).classList.add('active');
+        document.querySelector(`.tracker-step:nth-of-type(${currentStep - 1})`).classList.add('active');
+        document.getElementById('progress-bar').style.width = `${(currentStep - 1) * 33.33}%`;
+
+        // Display CAPTCHA when moving to Step 3
+        if (currentStep === 3) {
+            displayCaptcha();
+        }
+        
+        // Update tracker lines
+        const trackerLines = document.querySelectorAll('.tracker-line');
+        trackerLines.forEach((line, index) => {
+            line.classList.toggle('hidden', index >= currentStep - 1);
+        });
+    }
+
+    async function submitForm() {
+        const captchaInput = document.getElementById('captcha-input').value;
+
+        // Validate CAPTCHA
+        if (captchaInput !== generatedCaptcha) {
+            alert('CAPTCHA is incorrect. Please try again.');
+            return;
+        }
+
+        const step1Data = new FormData(document.getElementById('form-step-1'));
+        const step2Data = new FormData(document.getElementById('form-step-2'));
+
+        const data = {
+            email: step1Data.get('email'),
+            vehicleClass: step1Data.get('vehicleClass'),
+            date: step1Data.get('date'),
+            regNumber: step1Data.get('regNumber'),
+            rfidNumber: step1Data.get('rfidNumber'),
+            cardNumber: step2Data.get('cardNumber'),
+            merchantName: step2Data.get('merchantName'),
+            amount: parseFloat(step2Data.get('amount')),
+        };
+
+        try {
+            const response = await fetch('http://localhost:14000/api-auth/FastTag', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                alert('Data submitted successfully!');
+            } else {
+                alert('Error submitting data.');
+            }
+        } catch (error) {
+            alert('Network error: ' + error.message);
+        }
+    }
+</script>
+
+</body>
+</html>
