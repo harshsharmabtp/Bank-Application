@@ -1,12 +1,12 @@
-  require("dotenv").config();
-  const express = require('express');
-  const app = express();
-  const router = require("./router/route");
-  const dbConnect = require("./utils/db");
-  const axios = require('axios');
- const {StudentLoan} = require("./controller/StudentLoan")
- const {getUserData} = require("./controller/interestrate")
- const {get_data} = require("./controller/fastag")
+const express = require('express');
+const app = express();
+const router = require("./router/route");
+const dbConnect = require("./utils/db");
+require("dotenv").config();
+const axios = require('axios');
+const {StudentLoan} = require("./controller/StudentLoan")
+const {getUserData} = require("./controller/interestrate")
+const {get_data} = require("./controller/fastag")
 const cors = require('cors');
 const { submitForm } = require("./controller/fastagpayment");
 const {chekb} = require("./controller/checkbook");
@@ -105,7 +105,7 @@ const sha256 = require("sha256")
 
 
 
-  const PORT = 14000;
+  const PORT = 14001;
 
   dbConnect.then(() => {
       app.listen(PORT, () => {
